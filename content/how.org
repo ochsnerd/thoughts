@@ -1,5 +1,13 @@
-This site is based on https://systemcrafters.net/publishing-websites-with-org-mode/building-the-site/
+#+TITLE: Building this site
 
-Adjustments:
+The site is statically generated from orgmode-files using emacs, and then hosted on github pages. The source is on [[https://github.com/ochsnerd/thoughts][github]].
 
-use nix
+The build process for this site is largely based on the tutorial by [[https://systemcrafters.net/publishing-websites-with-org-mode/building-the-site/][System Crafters]].
+
+I made two adjustments:
+
+- I use nix to install emacs with its required packages (based on using [[https://nix.dev/manual/nix/2.22/command-ref/new-cli/nix3-shell][nix shell]] as a shebang)
+- I use a pre-generated [[https://github.com/gongzhitaao/orgcss/tree/master][stylesheet for org-exports]], which in includes syntax-highlighting for src-blocks.
+  For now this seems (almost) good enough, but its missing highlighting for nix and haskell.
+  There is a way to make htmlize generate css when exporting the org-files, but for that to work
+  a grammar for every language needs to be available, /and/ it should not clash with a global css.

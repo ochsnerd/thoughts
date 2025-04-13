@@ -4,7 +4,7 @@
 see https://github.com/mhwombat/nix-for-numbskulls/blob/78bcc186f79931c0e4a1e445e2f6b1f12f6d46be/Haskell/ss-haskell-dev.md
 
 1. Set up cabal (gives full-on project structure)
-   #+begin_src
+   #+begin_src bash
    nix-shell --packages haskellPackages.cabal-install  --run 'cabal init'
    #+end_src
 2. Write the following ~default.nix~
@@ -13,7 +13,7 @@ see https://github.com/mhwombat/nix-for-numbskulls/blob/78bcc186f79931c0e4a1e445
    nixpkgs.haskellPackages.developPackage { root = ./.; }
    #+end_quote
    optional:
-   #+begin_src
+   #+begin_src bash
    direnv allow && echo "use nix" > .envrc
    #+end_src
 3. Add a dependency (from Hackage?)
