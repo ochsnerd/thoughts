@@ -1,0 +1,5 @@
+* Pagesource for [[https://ochsnerd.github.io/thoughts][ochsnerd.github.io/thoughts]]
+
+* To-Do
+- syntax highlighting for haskell and nix
+- some simple navigation (up, back, forward)
