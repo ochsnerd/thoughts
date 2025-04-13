@@ -1,2 +1,2 @@
 #!/usr/bin/env nix
-#!nix shell --impure --file deps.nix --command emacs -x build-site.el
+#!nix shell --impure --file deps.nix --command emacs -x build.el
