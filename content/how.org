@@ -1,0 +1,5 @@
+This site is based on https://systemcrafters.net/publishing-websites-with-org-mode/building-the-site/
+
+Adjustments:
+
+use nix

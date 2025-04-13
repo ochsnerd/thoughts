@@ -1,0 +1,98 @@
+#+TITLE: Find in terms of Fold
+
+* python
+#+begin_src python :results output
+from functools import reduce
+from typing import TypeVar
+T = TypeVar('T')
+
+vals = [1,2,3,4,5,3]
+
+def myfind(vals: list[T], val: T) -> int:
+    l = len(vals)
+    def f(acc, x):
+        current, found = acc
+        if found != l or not x == val:
+            return current + 1, found
+        return current + 1, current
+
+    return reduce(f, vals, (0, l))[1]
+
+print(vals.index(3))
+print(myfind(vals, 3))
+#+end_src
+
+#+RESULTS:
+: 2
+: 2
+
+* haskell
+elemIndex returns a =Maybe= (~ =std::optional=), which we need to unpack (=fromMaybe= ~ =std::optional::value_or=)
+#+begin_src haskell
+import Data.List
+import Data.Maybe
+fromMaybe (-1) $ elemIndex 3 [1,2,3,4,5,3]
+#+end_src
+
+#+RESULTS:
+: 2
+
+This doesn't actually work (because org-babel sends this to ghci (haskell interpreter), which doesn't like the syntax).
+Writing it to a seperate file and loading that file in ghci does work however.
+#+begin_src haskell
+myfind :: Eq a => a -> [a] -> Int
+myfind val vals = snd $ foldl f (0, l) vals
+  where l = length vals
+        f (current, found) x
+          | found /= l || x /= val = (current + 1, found)
+          | otherwise              = (current + 1, current)
+myfind 3 [1,2,3,4,5,3]
+#+end_src
+
+#+RESULTS:
+
+* c++
+
+#+begin_src C++ :main no :includes optional functional numeric iostream cassert vector utility :flags -std=c++23
+template<class Iterator, class T>
+Iterator myfind(Iterator begin, Iterator end, T val)
+{
+    using Pair = std::pair<Iterator, Iterator>;
+    return std::accumulate(begin, end, Pair{begin, end},
+                    [begin, end, val](const Pair& acc, const T& x) -> Pair {
+                        const auto& [current, found] = acc;
+                        if ( found != end || !( x == val ) ) return { current + 1, found };
+                        return {current + 1, current};
+                    }).second;
+}
+
+template<class Iterator, class T>
+Iterator myfindalmostbetter(Iterator begin, Iterator end, T val)
+{
+    using Pair = std::pair<Iterator, Iterator>;
+    // because of found < current, our lambda is now associative, but still not commutative (trivially so because of the argument types)
+    // std::reduce mandates associtativity AND commutativity, so we still can't use it
+    return std::accumulate(begin, end, Pair{begin, end},
+                    [begin, val](const Pair& acc, const T& x) -> Pair {
+                        const auto& [current, found] = acc;
+                        if ( found < current || !( x == val ) ) return {current + 1, found};
+                        return {current + 1, current};
+                    }).second;
+}
+
+
+int main()
+{
+    std::vector<int> vals{1,2,3,4,5,3};
+    std::cout << std::find(vals.cbegin(), vals.cend(), 3)- vals.begin() << '\n';
+    std::cout << myfind(vals.cbegin(), vals.cend(), 3)- vals.begin() << '\n';
+    std::cout << myfindalmostbetter(vals.cbegin(), vals.cend(), 3)- vals.begin() << '\n';
+}
+#+end_src
+
+#+RESULTS:
+| 2 |
+| 2 |
+| 2 |
+
+TODO: ranges
