@@ -1,0 +1,30 @@
+name: Build + Publish
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Prepare environment
+        run: |
+          rm -r public || true
+          mkdir public
+
+      - name: Build
+        run: ./build
+
+      - name: Publish generated content to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: public

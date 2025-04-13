@@ -1,14 +1,11 @@
-name: Publish to gh pages
+name: Build
 
 on:
-  push:
+  pull_request:
     branches: [ "main" ]
 
-permissions:
-  contents: write
-
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,14 +15,15 @@ jobs:
 
       - name: Prepare environment
         run: |
-          rm -r public
+          rm -r public || true
           mkdir public
 
       - name: Build
         run: ./build
 
-      - name: Publish generated content to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          branch: gh-pages
-          folder: public
+          name: public
+     	  path: public/
+          retention-days: 5
