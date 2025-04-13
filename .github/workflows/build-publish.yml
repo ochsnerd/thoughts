@@ -28,3 +28,5 @@ jobs:
         with:
           branch: gh-pages
           folder: public
+          token: ${{ secrets.DEPLOY_TOKEN }}
+          repository-name: ochsnerd/ochsnerd.github.io
