@@ -1,0 +1,7 @@
+C# Nullable<T> is similar, but not quite the same, as Maybe T
+
+* But what is the difference of c# nullable class and struct?
+
+why cant fmap be written as extension method?
+
+* Lifted operator*: a.AndThen(a => b?operator*(a))
