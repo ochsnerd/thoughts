@@ -1,3 +1,5 @@
-- visible (to some extent) forces ordering
-- motivated to do soemthing
-- train communication
+This is an experiment.
+
+- I hope that giving some visibility to some of my notes motivates me to structure them better.
+- I hope that structuring my notes better makes me better at communicating.
+- I hope that well-structured notes are longer-lived.

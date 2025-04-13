@@ -1,4 +1,5 @@
 #+TITLE: A Subset of my Thoughts
+#+OPTIONS: toc:nil
 
 * [[file:why.org][Why]]
 
