@@ -4,7 +4,3 @@
 * [[file:why.org][Why]]
 
 * [[file:how.org][How]]
-
-* [[file:haskell_on_nixos.org][Haskell on Nixos]]
-
-* [[file:find_fold.org][Find in Terms of Fold]]
