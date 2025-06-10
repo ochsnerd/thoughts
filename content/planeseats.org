@@ -1,0 +1,34 @@
+#+TITLE: The Airplane Seating Problem
+
+In an airplane with $N$ seats, each seat is assigned to a person. Boarding happens as
+follows: The first person sits in a random seat. Every subsequent person sits
+in their assigned seat if its free, otherwise they pick a random seat to sit in.
+What is the probabilty of the last person finding their assign seat unoccupied?
+
+The first thing to notice is that when the first person happens to pick their
+assigned seat, everyone else can just sit in their assigned seat.
+
+The second thing to notice is the recursive structure of the boarding procedure:
+If a person sits in a seat which is not theirs, the person whose seat they stole will be
+in a very similar situation again -- they could sit in the seat of the first person, in which
+case everyone else can just sit in their assigned seat. Or they could choose to sit in the seat
+of the last person, in which case its game over. Any other choice leads to the same situation later.
+
+To summarize, every time a random choice is made, there are two special seats: one that
+guarantees that the last person can sit in their assigned seat, and one that guarantees that
+thats not the case. All other choices (seats) delegate the decision to the affected person.
+Since there's no difference between the two special seats from the point of view of the
+random sitter, we must conclude that both outcomes are equally likely.
+
+More explicitly:
+Let $p(n)$ be the chance that the last passenger finds their seat unoccupied in
+a plane with $n$ passengers.
+We can express $p(n)$ by distinguishing the three previously described cases
+
+\begin{equation}
+p(n) = \frac{1}{n} \cdot 1 + \frac{n-2}{n} p(n-1) + \frac{1}{n} \cdot 0.
+\end{equation}
+
+Its straightforward that $p(2) = \frac{1}{2}$.
+
+By induction, it follows that $p(N) = \frac{1}{2}$ for all $N \geq 2$ -- but we already knew that from the symmetry.
