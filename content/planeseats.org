@@ -1,0 +1,38 @@
+#+TITLE: The Airplane Seating Problem
+
+In an airplane with $N$ seats, each seat is assigned to a person. Boarding happens as
+follows: The first person sits in a random seat. Every subsequent person sits
+in their assigned seat if its free, otherwise they pick a random seat to sit in.
+What is the probabilty of the last person finding their assign seat unoccupied?
+
+The first thing to notice is that when the first person happens to pick their
+assigned seat, everyone else can just sit in their assigned seat.
+
+The second thing to notice is the recursive structure of the boarding procedure:
+If the first person sits in a seat thats not theirs, the next person is in a very
+similar situation -- there is a seat that they could sit which 'deescalates' the
+situation; namely the seat of the previous person.
+If that happens, everyone else can just sit in their assigned seat.
+
+Of course, for every random choice of seat, the chosen seat could be the seat of the last
+person, in which case its game over.
+
+To summarize, every time a random choice is made, there are two special seats: one that
+guarantees that the last person can sit in their assigned seat, and one that guarantees that
+thats not the case. All other choices (seats) delegate the decision to the next person.
+Since there's no difference between the two special seats from the point of view of the
+random sitter, we must conclude that both outcomes are equally likely.
+
+More explicitly:
+Let $S_n$, $1 \leq n \leq N$ be the seats on the plane, with seat $S_n$ assigned to person $n$.
+Let $p(N)$ be the probability that the last person sits in their assigned seat. Then
+
+\begin{equation}
+p(N) = 1 \cdot P(S_N) + \sum_{j \neq 1,N} P(S_j) p(N-1) + 0 \cdot P(S_1) = \frac{1}{N} + \frac{N-2}{N} p(N-1),
+\end{equation}
+
+where in the second expression the $0$ explicitly emphasizes the symmetry,
+and the second equality holds because the choice is of seat is made uniformly at random.
+
+Its straightforward that $p(2) = \frac{1}{2}$.
+By induction, it follows that $p(N) = \frac{1}{2}$ -- but we already knew that from the symmetry.
