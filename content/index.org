@@ -1,5 +1,7 @@
-#+TITLE: A Subset of my Thoughts
+#+TITLE: Some of my Thoughts
 #+OPTIONS: toc:nil
+
+* [[file:planeseats.org][Planeseats]]
 
 * [[file:why.org][Why]]
 
