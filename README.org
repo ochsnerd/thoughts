@@ -1,4 +1,4 @@
-* Pagesource for [[https://ochsnerd.github.io/thoughts][ochsnerd.github.io/thoughts]]
+* Pagesource for [[https://ochsnerd.github.io][ochsnerd.github.io]]
 
 * To-Do
 - syntax highlighting for haskell and nix
