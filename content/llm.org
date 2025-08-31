@@ -1,0 +1,8 @@
+cognitive model for llm interactions
+
+when a human is eloquent and confident and uses the 'correct' terminoplogy,
+we assume that they're competent.
+
+when a computer gives an output, we assume it to be largely correct.
+
+these two things are not true for llms.
